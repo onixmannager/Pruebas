@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinonix - Películas y series ilimitadas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #141414;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: 800;
+            color: red;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: transform 0.3s ease-in-out;
+            animation: netflixEffect 4s ease-in-out infinite;
+        }
+
+        @keyframes netflixEffect {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(1.1); }
+            75% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .cta-button {
+            background-color: #E50914;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-button:hover {
+            background-color: #f40612;
+            transform: scale(1.05);
+        }
+
+        /* Nuevos estilos añadidos */
+        .feature-box {
+            background-color: #2a2a2a;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #404040;
+        }
+
+        .slogan {
+            color: #E50914;
+            font-size: 1.8rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .feature-box h2 {
+            color: #fff;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .feature-box p {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                        url('https://source.unsplash.com/random/1920x1080/?movie');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            margin-top: -80px;
+        }
+
+        .check-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .check-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .check-icon {
+            margin-right: 10px;
+            font-size: 1.2em;
+            color: #00ff00;
+        }
+
+        @media (max-width: 768px) {
+            .feature-box {
+                padding: 1.5rem;
+                margin: 0 20px;
+            }
+            
+            .slogan {
+                font-size: 1.4rem;
+            }
+            
+            .feature-box h2 {
+                font-size: 1.8rem;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Resto del CSS original */
+        .carousel-section {
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .carousel-title {
+            padding: 0 50px;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .movies-wrapper {
+            display: flex;
+            width: 200%;
+            animation: scroll 40s linear infinite;
+        }
+
+        .movie-card {
+            flex: 0 0 16.666%;
+            height: 300px;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin: 0 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .footer {
+            padding: 50px 100px;
+            background-color: #000;
+            color: #757575;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-column h3 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-column a {
+            color: inherit;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: #E50914;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="logo">CInonIX</a>
+        <button class="cta-button">Acceder A Pago</button>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="feature-box">
+                <h2>ACTIVAR SUSCRIPCIÓN PREMIUM</h2>
+                <ul class="check-list">
+                    <li><span class="check-icon">✅</span> <strong>Un solo pago, acceso de por vida</strong></li>
+                    <li><span class="check-icon">✅</span> <strong>Sin suscripciones mensuales</strong></li>
+                    <li><span class="check-icon">✅</span> <strong>Contenido sin restricciones</strong></li>
+                    <li><span class="check-icon">✅</span> <strong>Acceso A Descargas</strong></li>
+                    <li><span class="check-icon">✅</span> <strong>Siempre Disponible</strong></li>
+                </ul>
+                
+                <p class="slogan">¡Todo el cine del mundo por menos de lo que cuesta una entrada!</p>
+                
+                <button class="cta-button">Acceder Ahora - 99€</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Contenido</h3>
+                <a href="#peliculas">Películas</a>
+                <a href="#series">Series</a>
+                <a href="#documentales">Documentales</a>
+            </div>
+            <div class="footer-column">
+                <h3>Nosotros</h3>
+                <a href="#sobre-cinonix">Sobre Cinonix</a>
+            </div>
+            <div class="footer-column">
+                <h3>Síguenos</h3>
+                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 Cinonix - Todos los derechos reservados
+        </div>
+    </footer>
+
+    <script type="module">
+        // Firebase y otros scripts
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyD2dZO307P3B_YmH8dZI5-ll_ZO6uzy0SU",
+            authDomain: "inframe2.firebaseapp.com",
+            databaseURL: "https://inframe2-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "inframe2",
+            storageBucket: "inframe2.firebasestorage.app",
+            messagingSenderId: "68415435303",
+            appId: "1:68415435303:web:b26db7799d71dee6119402"
+        };
+
+        const app = initializeApp(firebaseConfig);
+    </script>
+</body>
+</html>
