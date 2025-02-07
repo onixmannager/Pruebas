@@ -52,7 +52,7 @@ window.registrarUsuario = async function(email, password) {
       subscriptionActive: false
     });
     alert("Usuario registrado correctamente. Ahora inicia sesión.");
-    window.location.href = "login.html";
+    window.location.href = "001login.html";
   } catch (error) {
     console.error("Error en el registro:", error.message);
     alert("Error en el registro: " + error.message);
