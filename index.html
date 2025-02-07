@@ -19,46 +19,75 @@
             overflow-x: hidden;
         }
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.6);
-            color: white;
-            position: relative;
-            z-index: 2;
-        }
+    .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #000;
+    color: white;
+    position: relative; /* Asegúrate de que la cabecera esté en el contexto adecuado */
+    z-index: 2; /* Asegura que el encabezado esté por encima */
+}
 
-        .header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('fotolanding.webp');
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
-        }
+.logo {
+    font-size: 3rem; /* Tamaño de la fuente aumentado */
+    font-weight: 800; /* Fuente más gruesa */
+    color: red; /* Color rojo */
+    text-transform: uppercase;
+    text-decoration: none; /* Asegurarse de que no está subrayado */
+    transition: transform 0.3s ease-in-out;
+    animation: netflixEffect 4s ease-in-out infinite; /* Animación más suave */
+}
 
-        .logo {
-            font-size: 3rem;
-            font-weight: 800;
-            color: red;
-            text-transform: uppercase;
-            text-decoration: none;
-            animation: netflixEffect 4s ease-in-out infinite;
-        }
+/* Efecto de animación similar a Netflix */
+@keyframes netflixEffect {
+    0% {
+        transform: scale(1); /* Tamaño original */
+    }
+    25% {
+        transform: scale(1.2); /* Se agranda un poco */
+    }
+    50% {
+        transform: scale(1.1); /* Se encoge ligeramente */
+    }
+    75% {
+        transform: scale(1.2); /* Vuelve a agrandarse */
+    }
+    100% {
+        transform: scale(1); /* Tamaño original */
+    }
+}
 
-        @keyframes netflixEffect {
-            0% { transform: scale(1); }
-            25% { transform: scale(1.2); }
-            50% { transform: scale(1.1); }
-            75% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
+/* Estilo del botón de llamada a la acción */
+.cta-button {
+    padding: 10px 20px;
+    background-color: #ff4747;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #ff2a2a;
+}
+
+/* Estilo del botón de llamada a la acción */
+.cta-button {
+    padding: 10px 20px;
+    background-color: #ff4747;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #ff2a2a;
+}
 
         .cta-button {
             background-color: #E50914;
@@ -77,6 +106,7 @@
             transform: scale(1.05);
         }
 
+        /* Hero Section */
         .hero {
             height: 100vh;
             background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
@@ -109,6 +139,7 @@
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
         }
 
+        /* Carrusel */
         .carousel-section {
             padding: 20px 0;
             position: relative;
@@ -153,6 +184,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
         }
 
         .movie-title {
@@ -175,6 +207,7 @@
             100% { transform: translateX(-50%); }
         }
 
+        /* Footer */
         .footer {
             padding: 50px 100px;
             background-color: #000;
@@ -214,116 +247,375 @@
             border-top: 1px solid #333;
         }
 
-        /* Estilos añadidos para corrección de posición */
-        #sobre-cinonix {
-            padding-bottom: 150px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .check-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .check-list li {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .check-icon {
-            margin-right: 10px;
-            font-size: 1.2em;
-            color: green;
-        }
-
+        /* Responsive */
         @media (max-width: 1200px) {
-            .hero h1 { font-size: 3rem; }
-            .hero p { font-size: 1.2rem; }
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
         }
 
         @media (max-width: 768px) {
-            .header { padding: 15px 20px; }
-            .logo { font-size: 2rem; }
-            .cta-button { padding: 10px 20px; font-size: 1rem; }
-            .hero { height: 70vh; }
-            .hero h1 { font-size: 2rem; }
-            .hero p { font-size: 1rem; }
-            .carousel-title { padding: 0 20px; font-size: 1.2rem; }
-            .movie-card { height: 200px; }
-            .footer { padding: 30px 20px; }
-            .footer-content { grid-template-columns: repeat(2, 1fr); }
+            .header {
+                padding: 15px 20px;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+
+            .hero {
+                height: 70vh;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .carousel-title {
+                padding: 0 20px;
+                font-size: 1.2rem;
+            }
+
+            .movie-card {
+                height: 200px;
+            }
+
+            .footer {
+                padding: 30px 20px;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 480px) {
-            .movie-card { height: 150px; margin: 0 5px; }
-            .footer-content { grid-template-columns: 1fr; }
-            .footer-column { text-align: center; }
+            .movie-card {
+                height: 150px;
+                margin: 0 5px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-column {
+                text-align: center;
+            }
         }
+        
+        
+        
+        .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro semitransparente */
+    color: white;
+    position: relative; /* Necesario para que el z-index funcione */
+    z-index: 2; /* Asegura que el contenido de la cabecera esté por encima de la imagen */
+}
+
+.header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('fotolanding.webp');/* Ruta de tu imagen */
+    background-size: cover;
+    background-position: center;
+    z-index: -1; /* La imagen estará detrás del contenido */
+}
+        
+        
+        
+        
+        
     </style>
 </head>
 <body>
     <header class="header">
-        <a href="#" class="logo">CINONIX</a>
-        <button class="cta-button" onclick="location.href='001login.html';">Iniciar sesión</button>
-    </header>
+    <a href="#" class="logo">CInonIX</a>
+    <button class="cta-button" onclick="location.href='001login.html';">Iniciar sesión</button>
+</header>
+    
 
     <section class="hero">
         <div class="hero-content">
             <h1>Películas y series sin límites y mucho más</h1>
-            <h3 style="color: red;">OFERTA DE LANZAMIENTO VÁLIDA HASTA FIN DE MES.</h3>
-            <p>Un solo pago de 19,99 €, <strong>Suscripción vitalicia</strong></p>
-            <p>¿Quieres ver algo ya? Pulsa en comenzar para crear una suscripción en Cinonix y disfrutar.</p>
+            <h3><font color="red">OFERTA DE LANZAMIENTO VÁLIDA HASTA FIN DE MES.</font>
+            <p>Un solo pago de 19,99 € , <strong>Suscripción vitalicia</strong></br>&nbsp;</br>
+            
+
+¿Quieres ver algo ya? Pulsa en comenzar para crear una suscripción en Cinonix y disfrutar.</p>
             <button class="cta-button" onclick="location.href='002registro.html';">Comenzar</button>
         </div>
     </section>
 
-    <!-- Secciones del carrusel (se mantienen igual) -->
-    <section class="carousel-section" id="peliculas">
-        <h2 class="carousel-title">Películas</h2>
+    <section class="carousel-section"
+     id="peliculas" >
+    <h2 class="carousel-title">Peliculas</h2>
         <div class="carousel-container">
             <div class="movies-wrapper">
-                <!-- ... (contenido original del carrusel) ... -->
+                <!-- Películas duplicadas para efecto infinito -->
+                <div class="movie-card">
+                    <img src="granapuesta.jpg" alt="La Gran Apuesta">
+                    <span class="movie-title">La Gran Apuesta</span>
+                </div>
+                <div class="movie-card">
+                    <img src="laprueba.jpg" alt="La Prueba">
+                    <span class="movie-title">La Prueba</span>
+                </div>
+                <div class="movie-card">
+                    <img src="heman.jpg" alt="He-Man">
+                    <span class="movie-title">He-Man</span>
+                </div>
+                <div class="movie-card">
+                    <img src="perrosdeguerra.jpg" alt="Perros de Guerra">
+                    <span class="movie-title">Perros de Guerra</span>
+                </div>
+                <div class="movie-card">
+                    <img src="ciudaddedios.jpg" alt="Ciudad de Dios">
+                    <span class="movie-title">Ciudad de Dios</span>
+                </div>
+                <div class="movie-card">
+                    <img src="asesinatojusto.jpg" alt="Asesinato Justo">
+                    <span class="movie-title">Asesinato Justo</span>
+                </div>
+                <!-- Duplicado para efecto infinito -->
+                <div class="movie-card">
+                    <img src="granapuesta.jpg" alt="La Gran Apuesta">
+                    <span class="movie-title">La Gran Apuesta</span>
+                </div>
+                <div class="movie-card">
+                    <img src="laprueba.jpg" alt="La Prueba">
+                    <span class="movie-title">La Prueba</span>
+                </div>
+                <div class="movie-card">
+                    <img src="heman.jpg" alt="He-Man">
+                    <span class="movie-title">He-Man</span>
+                </div>
+                <div class="movie-card">
+                    <img src="perrosdeguerra.jpg" alt="Perros de Guerra">
+                    <span class="movie-title">Perros de Guerra</span>
+                </div>
+                <div class="movie-card">
+                    <img src="ciudaddedios.jpg" alt="Ciudad de Dios">
+                    <span class="movie-title">Ciudad de Dios</span>
+                </div>
+                <div class="movie-card">
+                    <img src="asesinatojusto.jpg" alt="Asesinato Justo">
+                    <span class="movie-title">Asesinato Justo</span>
+                </div>
             </div>
         </div>
     </section>
-
-    <section class="carousel-section" id="series">
+    
+    
+    
+    
+    <section class="carousel-section" id="series" >
         <h2 class="carousel-title">Series</h2>
         <div class="carousel-container">
             <div class="movies-wrapper">
-                <!-- ... (contenido original del carrusel) ... -->
+                <!-- Películas duplicadas para efecto infinito -->
+                <div class="movie-card">
+                    <img src="granapuesta.jpg" alt="La Gran Apuesta">
+                    <span class="movie-title">La Gran Apuesta</span>
+                </div>
+                <div class="movie-card">
+                    <img src="laprueba.jpg" alt="La Prueba">
+                    <span class="movie-title">La Prueba</span>
+                </div>
+                <div class="movie-card">
+                    <img src="heman.jpg" alt="He-Man">
+                    <span class="movie-title">He-Man</span>
+                </div>
+                <div class="movie-card">
+                    <img src="perrosdeguerra.jpg" alt="Perros de Guerra">
+                    <span class="movie-title">Perros de Guerra</span>
+                </div>
+                <div class="movie-card">
+                    <img src="ciudaddedios.jpg" alt="Ciudad de Dios">
+                    <span class="movie-title">Ciudad de Dios</span>
+                </div>
+                <div class="movie-card">
+                    <img src="asesinatojusto.jpg" alt="Asesinato Justo">
+                    <span class="movie-title">Asesinato Justo</span>
+                </div>
+                <!-- Duplicado para efecto infinito -->
+                <div class="movie-card">
+                    <img src="granapuesta.jpg" alt="La Gran Apuesta">
+                    <span class="movie-title">La Gran Apuesta</span>
+                </div>
+                <div class="movie-card">
+                    <img src="laprueba.jpg" alt="La Prueba">
+                    <span class="movie-title">La Prueba</span>
+                </div>
+                <div class="movie-card">
+                    <img src="heman.jpg" alt="He-Man">
+                    <span class="movie-title">He-Man</span>
+                </div>
+                <div class="movie-card">
+                    <img src="perrosdeguerra.jpg" alt="Perros de Guerra">
+                    <span class="movie-title">Perros de Guerra</span>
+                </div>
+                <div class="movie-card">
+                    <img src="ciudaddedios.jpg" alt="Ciudad de Dios">
+                    <span class="movie-title">Ciudad de Dios</span>
+                </div>
+                <div class="movie-card">
+                    <img src="asesinatojusto.jpg" alt="Asesinato Justo">
+                    <span class="movie-title">Asesinato Justo</span>
+                </div>
             </div>
         </div>
     </section>
-
-    <section class="carousel-section" id="documentales">
+    
+    <section class="carousel-section" id="documentales" >
         <h2 class="carousel-title">Documentales</h2>
         <div class="carousel-container">
             <div class="movies-wrapper">
-                <!-- ... (contenido original del carrusel) ... -->
+                <!-- Películas duplicadas para efecto infinito -->
+                <div class="movie-card">
+                    <img src="granapuesta.jpg" alt="La Gran Apuesta">
+                    <span class="movie-title">La Gran Apuesta</span>
+                </div>
+                <div class="movie-card">
+                    <img src="laprueba.jpg" alt="La Prueba">
+                    <span class="movie-title">La Prueba</span>
+                </div>
+                <div class="movie-card">
+                    <img src="heman.jpg" alt="He-Man">
+                    <span class="movie-title">He-Man</span>
+                </div>
+                <div class="movie-card">
+                    <img src="perrosdeguerra.jpg" alt="Perros de Guerra">
+                    <span class="movie-title">Perros de Guerra</span>
+                </div>
+                <div class="movie-card">
+                    <img src="ciudaddedios.jpg" alt="Ciudad de Dios">
+                    <span class="movie-title">Ciudad de Dios</span>
+                </div>
+                <div class="movie-card">
+                    <img src="asesinatojusto.jpg" alt="Asesinato Justo">
+                    <span class="movie-title">Asesinato Justo</span>
+                </div>
+                <!-- Duplicado para efecto infinito -->
+                <div class="movie-card">
+                    <img src="granapuesta.jpg" alt="La Gran Apuesta">
+                    <span class="movie-title">La Gran Apuesta</span>
+                </div>
+                <div class="movie-card">
+                    <img src="laprueba.jpg" alt="La Prueba">
+                    <span class="movie-title">La Prueba</span>
+                </div>
+                <div class="movie-card">
+                    <img src="heman.jpg" alt="He-Man">
+                    <span class="movie-title">He-Man</span>
+                </div>
+                <div class="movie-card">
+                    <img src="perrosdeguerra.jpg" alt="Perros de Guerra">
+                    <span class="movie-title">Perros de Guerra</span>
+                </div>
+                <div class="movie-card">
+                    <img src="ciudaddedios.jpg" alt="Ciudad de Dios">
+                    <span class="movie-title">Ciudad de Dios</span>
+                </div>
+                <div class="movie-card">
+                    <img src="asesinatojusto.jpg" alt="Asesinato Justo">
+                    <span class="movie-title">Asesinato Justo</span>
+                    <br>&nbsp;</br>
+                </div>
             </div>
         </div>
     </section>
+    
+     
+    
+    
+    
+    <section class="hero">
+    <div class="hero-content" id= "sobre cinonix" >
+   
+        <h2><br>Todo el entretenimiento que quieres, en un solo pago</h2><br>&nbsp;<br>
+        <p>Aprovecha nuestra oferta de lanzamiento para poder ver todo el entretenimiento cuando quieras para toda la vida. <br> 
+            ¿Por qué pagar mes a mes cuando puedes disfrutarlo para siempre? Con nuestra suscripción de pago único, tendrás acceso ilimitado a películas, series y mucho más, sin cargos recurrentes ni sorpresas.</p>
+        <ul class="check-list">
+            <li><span class="check-icon">✅</span> <strong>Un solo pago, acceso de por vida</strong></li>
+            <li><span class="check-icon">✅</span> <strong>Sin suscripciones mensuales</strong></li>
+            <li><span class="check-icon">✅</span> <strong>Contenido sin restricciones</strong></li>
+            <li><span class="check-icon">✅</span> <strong>Acceso A Descargas</strong></li>
+            <li><span class="check-icon">✅</span> <strong>Siempre Disponible</strong></li>
+                      
+        </ul>
+        <p>No esperes más. Únete hoy y empieza a disfrutar sin límites.</p>
+        <button class="cta-button" onclick="location.href='002registro.html';">Acceder Ahora</button>
+    </div>
+           
+</section>
+    
+    
 
-    <!-- Sección final corregida -->
-    <section class="hero" id="sobre-cinonix">
-        <div class="hero-content">
-            <h2>Todo el entretenimiento que quieres, en un solo pago</h2>
-            <p>Aprovecha nuestra oferta de lanzamiento para poder ver todo el entretenimiento cuando quieras para toda la vida.</p>
-            <ul class="check-list">
-                <li><span class="check-icon">✅</span><strong>Un solo pago, acceso de por vida</strong></li>
-                <li><span class="check-icon">✅</span><strong>Sin suscripciones mensuales</strong></li>
-                <li><span class="check-icon">✅</span><strong>Contenido sin restricciones</strong></li>
-                <li><span class="check-icon">✅</span><strong>Acceso A Descargas</strong></li>
-                <li><span class="check-icon">✅</span><strong>Siempre Disponible</strong></li>
-            </ul>
-            <button class="cta-button" onclick="location.href='002registro.html';">Acceder Ahora</button>
-        </div>
-    </section>
+<style>
+    .check-list {
+        list-style: none;
+        padding: 0;
+    }
+    .check-list li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .check-icon {
+        margin-right: 10px;
+        font-size: 1.2em;
+        color: green;
+    }
+</style>
 
-    <!-- Footer corregido -->
+
+
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyD2dZO307P3B_YmH8dZI5-ll_ZO6uzy0SU",
+    authDomain: "inframe2.firebaseapp.com",
+    databaseURL: "https://inframe2-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "inframe2",
+    storageBucket: "inframe2.firebasestorage.app",
+    messagingSenderId: "68415435303",
+    appId: "1:68415435303:web:b26db7799d71dee6119402"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
+    
+      
+
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-column">
@@ -334,38 +626,24 @@
             </div>
             <div class="footer-column">
                 <h3>Nosotros</h3>
-                <a href="#sobre-cinonix">Sobre Cinonix</a>
+                <a href="#sobre cinonix">Sobre Cinonix</a>
             </div>
-            <div class="footer-column">
-                <h3>Soporte</h3>
-                <a href="https://t.me/Cinonix_bot" target="_blank">Centro de ayuda</a>
-            </div>
-            <div class="footer-column">
-                <h3>Síguenos</h3>
-                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
-                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
-                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-            </div>
+            
+      <div class="footer-column">
+            <h3>Soporte</h3>
+      <a href="https://t.me/Cinonix_bot" target="_blank">Centro de ayuda</a> <!-- Link externo para el centro de ayuda -->
         </div>
-        <div class="footer-bottom">
-            © 2025 Cinonix - Todos los derechos reservados
-        </div>
-    </footer>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-        
-        const firebaseConfig = {
-            apiKey: "AIzaSyD2dZO307P3B_YmH8dZI5-ll_ZO6uzy0SU",
-            authDomain: "inframe2.firebaseapp.com",
-            databaseURL: "https://inframe2-default-rtdb.europe-west1.firebasedatabase.app",
-            projectId: "inframe2",
-            storageBucket: "inframe2.firebasestorage.app",
-            messagingSenderId: "68415435303",
-            appId: "1:68415435303:web:b26db7799d71dee6119402"
-        };
-
-        const app = initializeApp(firebaseConfig);
-    </script>
+                
+         <div class="footer-column">
+      <h3>Síguenos</h3>
+      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a> <!-- Redirige a Facebook -->
+      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i> Twitter</a> <!-- Redirige a Twitter -->
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a> <!-- Redirige a Instagram -->
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 Cinonix - Todos los derechos reservados
+  </div>
+</footer>
 </body>
 </html>
