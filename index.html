@@ -77,31 +77,24 @@
             transform: scale(1.05);
         }
 
-        /* Primer Hero */
-        .hero:first-of-type {
-            margin-top: -80px;
+        .hero {
             height: 100vh;
             background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
                         url('https://source.unsplash.com/random/1920x1080/?movie');
             background-size: cover;
             background-position: center;
-        }
-
-        /* Hero general */
-        .hero {
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             padding: 0 20px;
             position: relative;
-            min-height: 100vh;
+            margin-top: -80px;
         }
 
         .hero-content {
             max-width: 800px;
             z-index: 1;
-            padding: 40px 0;
         }
 
         .hero h1 {
@@ -110,18 +103,12 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
 
-        .hero h3 {
-            color: red;
-            margin-bottom: 20px;
-        }
-
         .hero p {
             font-size: 1.5rem;
             margin-bottom: 30px;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
         }
 
-        /* Carrusel */
         .carousel-section {
             padding: 20px 0;
             position: relative;
@@ -188,27 +175,6 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* Lista de beneficios */
-        .check-list {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-        }
-
-        .check-list li {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-
-        .check-icon {
-            margin-right: 10px;
-            font-size: 1.2em;
-            color: #00ff00;
-        }
-
-        /* Footer */
         .footer {
             padding: 50px 100px;
             background-color: #000;
@@ -248,25 +214,46 @@
             border-top: 1px solid #333;
         }
 
-        /* Responsive */
+        /* Estilos añadidos para corrección de posición */
+        #sobre-cinonix {
+            padding-bottom: 150px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .check-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .check-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .check-icon {
+            margin-right: 10px;
+            font-size: 1.2em;
+            color: green;
+        }
+
         @media (max-width: 1200px) {
             .hero h1 { font-size: 3rem; }
             .hero p { font-size: 1.2rem; }
-            .footer { padding: 50px 40px; }
         }
 
         @media (max-width: 768px) {
             .header { padding: 15px 20px; }
             .logo { font-size: 2rem; }
             .cta-button { padding: 10px 20px; font-size: 1rem; }
-            .hero { min-height: 70vh; }
+            .hero { height: 70vh; }
             .hero h1 { font-size: 2rem; }
             .hero p { font-size: 1rem; }
             .carousel-title { padding: 0 20px; font-size: 1.2rem; }
             .movie-card { height: 200px; }
             .footer { padding: 30px 20px; }
             .footer-content { grid-template-columns: repeat(2, 1fr); }
-            .hero:last-of-type { padding-bottom: 80px; }
         }
 
         @media (max-width: 480px) {
@@ -285,18 +272,19 @@
     <section class="hero">
         <div class="hero-content">
             <h1>Películas y series sin límites y mucho más</h1>
-            <h3>OFERTA DE LANZAMIENTO VÁLIDA HASTA FIN DE MES.</h3>
+            <h3 style="color: red;">OFERTA DE LANZAMIENTO VÁLIDA HASTA FIN DE MES.</h3>
             <p>Un solo pago de 19,99 €, <strong>Suscripción vitalicia</strong></p>
             <p>¿Quieres ver algo ya? Pulsa en comenzar para crear una suscripción en Cinonix y disfrutar.</p>
             <button class="cta-button" onclick="location.href='002registro.html';">Comenzar</button>
         </div>
     </section>
 
+    <!-- Secciones del carrusel (se mantienen igual) -->
     <section class="carousel-section" id="peliculas">
         <h2 class="carousel-title">Películas</h2>
         <div class="carousel-container">
             <div class="movies-wrapper">
-                <!-- Contenido del carrusel películas -->
+                <!-- ... (contenido original del carrusel) ... -->
             </div>
         </div>
     </section>
@@ -305,7 +293,7 @@
         <h2 class="carousel-title">Series</h2>
         <div class="carousel-container">
             <div class="movies-wrapper">
-                <!-- Contenido del carrusel series -->
+                <!-- ... (contenido original del carrusel) ... -->
             </div>
         </div>
     </section>
@@ -314,11 +302,12 @@
         <h2 class="carousel-title">Documentales</h2>
         <div class="carousel-container">
             <div class="movies-wrapper">
-                <!-- Contenido del carrusel documentales -->
+                <!-- ... (contenido original del carrusel) ... -->
             </div>
         </div>
     </section>
 
+    <!-- Sección final corregida -->
     <section class="hero" id="sobre-cinonix">
         <div class="hero-content">
             <h2>Todo el entretenimiento que quieres, en un solo pago</h2>
@@ -334,6 +323,7 @@
         </div>
     </section>
 
+    <!-- Footer corregido -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-column">
@@ -363,7 +353,6 @@
     </footer>
 
     <script type="module">
-        // Firebase initialization
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
         
         const firebaseConfig = {
