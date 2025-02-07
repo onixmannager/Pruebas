@@ -74,7 +74,7 @@ window.iniciarSesion = async function(email, password) {
       if (data.subscriptionActive) {
         window.location.href = "cinonix.html";
       } else {
-        window.location.href = "pago.html";
+        window.location.href = "004pago.html";
       }
     } else {
       alert("No se encontró el registro del usuario. Contacta soporte.");
