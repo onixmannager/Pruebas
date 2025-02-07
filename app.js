@@ -72,7 +72,7 @@ window.iniciarSesion = async function(email, password) {
     if (userDocSnap.exists()) {
       const data = userDocSnap.data();
       if (data.subscriptionActive) {
-        window.location.href = "platform.html";
+        window.location.href = "cinonix.html";
       } else {
         window.location.href = "pago.html";
       }
