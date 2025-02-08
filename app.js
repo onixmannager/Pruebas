@@ -104,7 +104,7 @@ window.validarPagoEnConfirmacion = async function() {
       alert("Pago confirmado. Tu suscripción ha sido activada.");
 
       // Redirige a la plataforma
-      window.location.href = "platform.html";
+      window.location.href = "plataform.html";
     } catch (error) {
       console.error("Error al confirmar el pago:", error.message);
       alert("Error al confirmar el pago: " + error.message);
