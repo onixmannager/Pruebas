@@ -104,13 +104,13 @@ window.validarPagoEnConfirmacion = async function() {
       alert("Pago confirmado. Tu suscripción ha sido activada.");
 
       // Redirige a la plataforma
-      window.location.href = "plataform.html";
+      window.location.href = "cinonix.html";
     } catch (error) {
       console.error("Error al confirmar el pago:", error.message);
       alert("Error al confirmar el pago: " + error.message);
     }
   } else {
-    window.location.href = "001login.html";
+    window.location.href = "index.html";
   }
 };
 
@@ -124,7 +124,7 @@ window.restringirContenido = function() {
         
         if (userDocSnap.exists() && !userDocSnap.data().subscriptionActive) {
           alert("Debes activar tu suscripción.");
-          window.location.href = "pago.html";
+          window.location.href = "004pago.html";
         }
       } catch (error) {
         console.error("Error al verificar suscripción:", error.message);
@@ -144,7 +144,7 @@ window.redirigirSiPagado = function() {
         const userDocSnap = await getDoc(userDocRef);
         
         if (userDocSnap.exists() && userDocSnap.data().subscriptionActive) {
-          window.location.href = "platform.html";
+          window.location.href = "cinonix.html";
         }
       } catch (error) {
         console.error("Error al verificar estado de pago:", error.message);
