@@ -90,23 +90,31 @@ window.restablecerContrasena = async function(email) {
 };
 
 /** 🔹 CONFIRMAR PAGO Y ACTIVAR CUENTA */
-window.validarPagoEnConfirmacion = function() {
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      try {
-        const userDocRef = doc(db, "usuarios", user.uid);
-        await updateDoc(userDocRef, { subscriptionActive: true });
+window.validarPagoEnConfirmacion = async function() {
+  const user = firebase.auth().currentUser; // Obtiene el usuario autenticado actual
+  
+  if (user) {
+    try {
+      // Referencia al documento del usuario en la base de datos
+      const userDocRef = doc(db, "usuarios", user.uid);
+      
+      // Actualiza el campo 'subscriptionActive' de false a true
+      await updateDoc(userDocRef, { subscriptionActive: true });
 
-        alert("Pago confirmado.");
-        window.location.href = "platform.html";
-      } catch (error) {
-        console.error("Error al confirmar el pago:", error.message);
-        alert("Error al confirmar el pago: " + error.message);
-      }
-    } else {
-      window.location.href = "login.html";
+      // Muestra mensaje de confirmación
+      alert("Pago confirmado. Tu suscripción ha sido activada.");
+
+      // Redirige a la página de la plataforma
+      window.location.href = "platform.html";
+    } catch (error) {
+      // Manejo de errores
+      console.error("Error al confirmar el pago:", error.message);
+      alert("Error al confirmar el pago: " + error.message);
     }
-  });
+  } else {
+    // Si no hay usuario autenticado, redirige a la página de login
+    window.location.href = "004pago.html";
+  }
 };
 
 /** 🔹 RESTRINGIR CONTENIDO SOLO PARA SUSCRIPTORES */
