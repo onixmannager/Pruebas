@@ -19,12 +19,12 @@ import {
   updateDoc 
 } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-firestore.js";
 
-// 2. Configuración de Firebase (CORREGIDO)
+// 2. Configuración de Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyDngD8Yc5tuKeLar8-AxlCSGQXZdYNBEW0",
   authDomain: "cinonix-3a65d.firebaseapp.com",
   projectId: "cinonix-3a65d",
-  storageBucket: "cinonix-3a65d.appspot.com",  // 🔥 CORREGIDO 🔥
+  storageBucket: "cinonix-3a65d.appspot.com",
   messagingSenderId: "298364890273",
   appId: "1:298364890273:web:f8d61cd538f228648f54e0",
   measurementId: "G-9L2E23K72W"
@@ -90,15 +90,36 @@ window.restablecerContrasena = async function(email) {
 };
 
 /** 🔹 CONFIRMAR PAGO Y ACTIVAR CUENTA */
-window.validarPagoEnConfirmacion = function() {
+window.validarPagoEnConfirmacion = async function() {
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       try {
         const userDocRef = doc(db, "usuarios", user.uid);
-        await updateDoc(userDocRef, { subscriptionActive: true });
+        const userDocSnap = await getDoc(userDocRef);
 
-        alert("Pago confirmado.");
-        window.location.href = "platform.html";
+        if (userDocSnap.exists()) {
+          const userData = userDocSnap.data();
+          
+          // Verificar si ya estaba activo
+          if (userData.subscriptionActive) {
+            alert("Tu cuenta ya está activa.");
+            window.location.href = "platform.html";
+            return;
+          }
+
+          // Simulación de verificación de pago (aquí deberías integrar con tu pasarela de pago)
+          const pagoVerificado = await verificarPago(user.uid);
+
+          if (pagoVerificado) {
+            await updateDoc(userDocRef, { subscriptionActive: true });
+            alert("Pago confirmado. Accediendo a la plataforma...");
+            window.location.href = "platform.html";
+          } else {
+            alert("No se encontró un pago válido. Contacta con soporte.");
+          }
+        } else {
+          alert("Error: No se encontró información del usuario.");
+        }
       } catch (error) {
         console.error("Error al confirmar el pago:", error.message);
         alert("Error al confirmar el pago: " + error.message);
@@ -108,6 +129,20 @@ window.validarPagoEnConfirmacion = function() {
     }
   });
 };
+
+/** 🔹 FUNCIÓN DE VERIFICACIÓN DE PAGO (debes integrarla con tu proveedor de pagos) */
+async function verificarPago(userId) {
+  try {
+    // Aquí deberías realizar una consulta a tu base de datos o API de pago
+    console.log(`Verificando pago para el usuario: ${userId}`);
+
+    // Simulación: suponer que el pago está confirmado si el UID termina en número par
+    return parseInt(userId.slice(-1)) % 2 === 0;
+  } catch (error) {
+    console.error("Error al verificar el pago:", error);
+    return false;
+  }
+}
 
 /** 🔹 RESTRINGIR CONTENIDO SOLO PARA SUSCRIPTORES */
 window.restringirContenido = function() {
@@ -146,4 +181,16 @@ window.redirigirSiPagado = function() {
       }
     }
   });
+};
+
+/** 🔹 CERRAR SESIÓN */
+window.cerrarSesion = async function() {
+  try {
+    await signOut(auth);
+    alert("Sesión cerrada correctamente.");
+    window.location.href = "login.html";
+  } catch (error) {
+    console.error("Error al cerrar sesión:", error.message);
+    alert("Error al cerrar sesión: " + error.message);
+  }
 };
