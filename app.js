@@ -19,48 +19,37 @@ import {
   updateDoc 
 } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-firestore.js";
 
-// 2. Configuración de Firebase (reemplaza con tus datos, ya vienen incluidos)
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+// 2. Configuración de Firebase (CORREGIDO)
+const firebaseConfig = {
+  apiKey: "AIzaSyDngD8Yc5tuKeLar8-AxlCSGQXZdYNBEW0",
+  authDomain: "cinonix-3a65d.firebaseapp.com",
+  projectId: "cinonix-3a65d",
+  storageBucket: "cinonix-3a65d.appspot.com",  // 🔥 CORREGIDO 🔥
+  messagingSenderId: "298364890273",
+  appId: "1:298364890273:web:f8d61cd538f228648f54e0",
+  measurementId: "G-9L2E23K72W"
+};
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDngD8Yc5tuKeLar8-AxlCSGQXZdYNBEW0",
-    authDomain: "cinonix-3a65d.firebaseapp.com",
-    projectId: "cinonix-3a65d",
-    storageBucket: "cinonix-3a65d.firebasestorage.app",
-    messagingSenderId: "298364890273",
-    appId: "1:298364890273:web:f8d61cd538f228648f54e0",
-    measurementId: "G-9L2E23K72W"
-  };
-
-  // Initialize Firebase
+// 3. Inicializar Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// 4. Funciones de autenticación y control de acceso
-// Estas funciones se adjuntan al objeto window para que sean accesibles globalmente
+// 4. Funciones de autenticación
 
-/**
- * REGISTRO: Crea un nuevo usuario y almacena sus datos en Firestore.
- * Se establece "subscriptionActive" en false.
- */
+/** 🔹 REGISTRO DE USUARIO */
 window.registrarUsuario = async function(email, password) {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
-    // Crea el documento del usuario en la colección "usuarios"
+    
+    // Guardar en Firestore
     await setDoc(doc(db, "usuarios", user.uid), {
       email: email,
       subscriptionActive: false
     });
-    alert("Usuario registrado correctamente. Ahora inicia sesión.");
+
+    alert("Usuario registrado correctamente.");
     window.location.href = "001login.html";
   } catch (error) {
     console.error("Error en el registro:", error.message);
@@ -68,25 +57,20 @@ window.registrarUsuario = async function(email, password) {
   }
 };
 
-/**
- * INICIO DE SESIÓN: Inicia sesión y redirige según el estado de la suscripción.
- * Si subscriptionActive es true, redirige a "platform.html"; de lo contrario, a "pago.html".
- */
+/** 🔹 INICIO DE SESIÓN */
 window.iniciarSesion = async function(email, password) {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
+
     const userDocRef = doc(db, "usuarios", user.uid);
     const userDocSnap = await getDoc(userDocRef);
+
     if (userDocSnap.exists()) {
       const data = userDocSnap.data();
-      if (data.subscriptionActive) {
-        window.location.href = "cinonix.html";
-      } else {
-        window.location.href = "004pago.html";
-      }
+      window.location.href = data.subscriptionActive ? "cinonix.html" : "004pago.html";
     } else {
-      alert("No se encontró el registro del usuario. Contacta soporte.");
+      alert("No se encontró el registro del usuario.");
     }
   } catch (error) {
     console.error("Error al iniciar sesión:", error.message);
@@ -94,30 +78,26 @@ window.iniciarSesion = async function(email, password) {
   }
 };
 
-/**
- * RESTABLECER CONTRASEÑA: Envía un correo para restablecer la contraseña.
- */
+/** 🔹 RESTABLECER CONTRASEÑA */
 window.restablecerContrasena = async function(email) {
   try {
     await sendPasswordResetEmail(auth, email);
     alert("Se ha enviado un correo para restablecer la contraseña.");
   } catch (error) {
-    console.error("Error al enviar el correo de restablecimiento:", error.message);
+    console.error("Error al restablecer la contraseña:", error.message);
     alert("Error: " + error.message);
   }
 };
 
-/**
- * VALIDAR PAGO EN CONFIRMACIÓN: Se llama desde la página de confirmación de pago.
- * Actualiza en Firestore el campo "subscriptionActive" a true.
- */
+/** 🔹 CONFIRMAR PAGO Y ACTIVAR CUENTA */
 window.validarPagoEnConfirmacion = function() {
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       try {
         const userDocRef = doc(db, "usuarios", user.uid);
         await updateDoc(userDocRef, { subscriptionActive: true });
-        alert("Pago confirmado. ¡Bienvenido a la plataforma!");
+
+        alert("Pago confirmado.");
         window.location.href = "platform.html";
       } catch (error) {
         console.error("Error al confirmar el pago:", error.message);
@@ -129,31 +109,20 @@ window.validarPagoEnConfirmacion = function() {
   });
 };
 
-/**
- * RESTRINGIR CONTENIDO: Se llama en páginas protegidas.
- * Verifica que el usuario esté autenticado y que su suscripción esté activa;
- * si no es así, redirige a "pago.html".
- */
+/** 🔹 RESTRINGIR CONTENIDO SOLO PARA SUSCRIPTORES */
 window.restringirContenido = function() {
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       try {
         const userDocRef = doc(db, "usuarios", user.uid);
         const userDocSnap = await getDoc(userDocRef);
-        if (userDocSnap.exists()) {
-          const data = userDocSnap.data();
-          if (!data.subscriptionActive) {
-            alert("Necesitas activar tu suscripción para acceder a este contenido.");
-            window.location.href = "pago.html";
-          }
-          // Si la suscripción está activa, el usuario puede continuar.
-        } else {
-          await signOut(auth);
-          window.location.href = "login.html";
+        
+        if (userDocSnap.exists() && !userDocSnap.data().subscriptionActive) {
+          alert("Debes activar tu suscripción.");
+          window.location.href = "pago.html";
         }
       } catch (error) {
-        console.error("Error al verificar la suscripción:", error.message);
-        alert("Error de conexión. Intenta de nuevo.");
+        console.error("Error al verificar suscripción:", error.message);
       }
     } else {
       window.location.href = "login.html";
@@ -161,21 +130,19 @@ window.restringirContenido = function() {
   });
 };
 
-/**
- * REDIRECCIÓN DESDE INDEX: Si el usuario ya está autenticado y ha pagado,
- * redirige a "platform.html" para que no se muestre la landing.
- */
+/** 🔹 REDIRIGIR DESDE INDEX SI YA PAGÓ */
 window.redirigirSiPagado = function() {
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       try {
         const userDocRef = doc(db, "usuarios", user.uid);
         const userDocSnap = await getDoc(userDocRef);
+        
         if (userDocSnap.exists() && userDocSnap.data().subscriptionActive) {
           window.location.href = "platform.html";
         }
       } catch (error) {
-        console.error("Error al verificar el estado del usuario:", error.message);
+        console.error("Error al verificar estado de pago:", error.message);
       }
     }
   });
