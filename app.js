@@ -20,18 +20,28 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-firestore.js";
 
 // 2. Configuración de Firebase (reemplaza con tus datos, ya vienen incluidos)
-const firebaseConfig = {
-  apiKey: "AIzaSyD2dZO307P3B_YmH8dZI5-ll_ZO6uzy0SU",
-  authDomain: "inframe2.firebaseapp.com",
-  databaseURL: "https://inframe2-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "inframe2",
-  storageBucket: "inframe2.firebasestorage.app",
-  messagingSenderId: "68415435303",
-  appId: "1:68415435303:web:b26db7799d71dee6119402"
-};
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
-// 3. Inicializa Firebase, Auth y Firestore
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDngD8Yc5tuKeLar8-AxlCSGQXZdYNBEW0",
+    authDomain: "cinonix-3a65d.firebaseapp.com",
+    projectId: "cinonix-3a65d",
+    storageBucket: "cinonix-3a65d.firebasestorage.app",
+    messagingSenderId: "298364890273",
+    appId: "1:298364890273:web:f8d61cd538f228648f54e0",
+    measurementId: "G-9L2E23K72W"
+  };
+
+  // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
