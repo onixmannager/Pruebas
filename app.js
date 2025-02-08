@@ -113,7 +113,7 @@ window.validarPagoEnConfirmacion = async function() {
     }
   } else {
     // Si no hay usuario autenticado, redirige a la página de login
-    window.location.href = "004pago.html";
+    window.location.href = "001login.html";
   }
 };
 
