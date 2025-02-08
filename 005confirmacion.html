@@ -192,13 +192,14 @@
       </div>
       <h1 class="payment-title">Pago Confirmado</h1>
       <p class="payment-text">
-        ¡Gracias por tu compra! Para activar tu acceso vitalicio, 
-        es <strong>imprescindible</strong> que pulses el siguiente botón 
-        para completar la verificación final de tu suscripción.
+        ¡Gracias por tu compra! <br>Para terminar es <strong>imprescindible</strong> que pulses el siguiente botón 
+        para completar la verificación de tu cuenta.
       </p>
-      <button onclick="marcarComoPagado()" class="verify-button">CONFIRMAR VERIFICACIÓN</button>
+      <button onclick="validarPagoEnConfirmacion()">Confirmar</button>
     </div>
-  </div> <!-- Footer --><footer class="footer">
+  </div> 
+  <!-- Footer -->
+  <footer class="footer">
   <div class="footer-content">
     <div class="footer-column">
       <h3>Contenido</h3>
@@ -224,35 +225,6 @@
   <div class="footer-bottom">
     © 2025 Cinonix - Todos los derechos reservados
   </div>
-</footer>  <!-- Firebase SDK -->  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js"></script>  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>  <script>
-    // Configuración Firebase (usar tus datos)
-    const firebaseConfig = {
-      apiKey: "TU_API_KEY",
-      authDomain: "TU_DOMAIN.firebaseapp.com",
-      projectId: "TU_PROJECT_ID",
-      storageBucket: "TU_BUCKET.appspot.com",
-      messagingSenderId: "TU_SENDER_ID",
-      appId: "TU_APP_ID"
-    };
-
-    const app = firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-
-    function marcarComoPagado() {
-      const user = auth.currentUser;
-      
-      if (user) {
-        db.collection('users').doc(user.uid).update({
-          paid: true,
-          paymentDate: new Date()
-        })
-        .then(() => window.location.href = "plataforma.html")
-        .catch(error => alert("Error: " + error.message));
-      } else {
-        alert("Error: Sesión no detectada");
-        window.location.href = "login.html";
-      }
-    }
-  </script></body>
+</footer>
+</body>
 </html>
