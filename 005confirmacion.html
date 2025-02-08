@@ -185,7 +185,9 @@
   <!-- Header idéntico al inicio -->
   <header class="header">
     <a href="index.html" class="logo">CINONIX</a>
-  </header>  <!-- Contenido principal -->  <div class="payment-container">
+  </header> 
+  <!-- Contenido principal -->  
+  <div class="payment-container">
     <div class="payment-card">
       <div class="checkmark-container">
         <i class="fas fa-check-circle checkmark"></i>
@@ -224,35 +226,11 @@
   <div class="footer-bottom">
     © 2025 Cinonix - Todos los derechos reservados
   </div>
-</footer>  <!-- Firebase SDK -->  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js"></script>  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>  <script>
-    // Configuración Firebase (usar tus datos)
-    const firebaseConfig = {
-      apiKey: "TU_API_KEY",
-      authDomain: "TU_DOMAIN.firebaseapp.com",
-      projectId: "TU_PROJECT_ID",
-      storageBucket: "TU_BUCKET.appspot.com",
-      messagingSenderId: "TU_SENDER_ID",
-      appId: "TU_APP_ID"
-    };
-
-    const app = firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-
-    function marcarComoPagado() {
-      const user = auth.currentUser;
-      
-      if (user) {
-        db.collection('users').doc(user.uid).update({
-          paid: true,
-          paymentDate: new Date()
-        })
-        .then(() => window.location.href = "plataforma.html")
-        .catch(error => alert("Error: " + error.message));
-      } else {
-        alert("Error: Sesión no detectada");
-        window.location.href = "login.html";
-      }
-    }
-  </script></body>
+</footer>  
+  
+  <script type="module">
+    // Al cargar la página se llama a la función para confirmar el pago
+    window.validarPagoEnConfirmacion();
+</script>
+</body>
 </html>
