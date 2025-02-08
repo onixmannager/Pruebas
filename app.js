@@ -91,14 +91,19 @@ window.restablecerContrasena = async function(email) {
 
 /** 🔹 CONFIRMAR PAGO Y ACTIVAR CUENTA */
 window.validarPagoEnConfirmacion = async function() {
-window.validarPagoEnConfirmacion = async function() {
-  const user = auth.currentUser; // Usar 'auth.currentUser' en lugar de 'firebase.auth().currentUser'
-
+  const user = auth.currentUser; // Usa auth.currentUser en lugar de firebase.auth().currentUser
+  
   if (user) {
     try {
       const userDocRef = doc(db, "usuarios", user.uid);
+      
+      // Actualiza el campo 'subscriptionActive' de false a true
       await updateDoc(userDocRef, { subscriptionActive: true });
+
+      console.log("Pago confirmado. Suscripción activada.");
       alert("Pago confirmado. Tu suscripción ha sido activada.");
+
+      // Redirige a la plataforma
       window.location.href = "platform.html";
     } catch (error) {
       console.error("Error al confirmar el pago:", error.message);
