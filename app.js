@@ -161,11 +161,67 @@ window.restringirContenido = function() {
       }
     } else {
       window.location.href = "login.html";
+/** 🔹 CONFIRMAR PAGO Y ACTIVAR CUENTA */
+window.validarPagoEnConfirmacion = async function() {
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      try {
+        const userDocRef = doc(db, "usuarios", user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+
+        if (userDocSnap.exists()) {
+          const userData = userDocSnap.data();
+          
+          // Si la suscripción ya está activa, redirigir directamente
+          if (userData.subscriptionActive) {
+            alert("Tu cuenta ya está activa.");
+            window.location.href = "platform.html";
+            return;
+          }
+
+          // Marcar manualmente como pagado en Firebase
+          await updateDoc(userDocRef, { subscriptionActive: true });
+
+          alert("Pago confirmado. Accediendo a la plataforma...");
+          window.location.href = "platform.html";
+        } else {
+          alert("Error: No se encontró información del usuario.");
+        }
+      } catch (error) {
+        console.error("Error al confirmar el pago:", error.message);
+        alert("Error al confirmar el pago: " + error.message);
+      }
+    } else {
+      window.location.href = "login.html";
+    }
+  });
+ };
+};
+
+
+    /** 🔹 RESTRINGIR CONTENIDO SOLO PARA SUSCRIPTORES */
+window.restringirContenido = function() {
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      try {
+        const userDocRef = doc(db, "usuarios", user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        
+        if (userDocSnap.exists() && !userDocSnap.data().subscriptionActive) {
+          alert("Debes activar tu suscripción.");
+          window.location.href = "pago.html";
+        }
+      } catch (error) {
+        console.error("Error al verificar suscripción:", error.message);
+      }
+    } else {
+      window.location.href = "login.html";
     }
   });
 };
 
-/** 🔹 REDIRIGIR DESDE INDEX SI YA PAGÓ */
+
+    /** 🔹 REDIRIGIR DESDE INDEX SI YA PAGÓ */
 window.redirigirSiPagado = function() {
   onAuthStateChanged(auth, async (user) => {
     if (user) {
@@ -182,6 +238,9 @@ window.redirigirSiPagado = function() {
     }
   });
 };
+
+
+    
 
 /** 🔹 CERRAR SESIÓN */
 window.cerrarSesion = async function() {
